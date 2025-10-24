@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop  # puedes agregar más ramas si quieres
+      - imanol
 
 jobs:
   sync:
