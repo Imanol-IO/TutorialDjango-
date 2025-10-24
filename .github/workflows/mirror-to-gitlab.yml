@@ -20,7 +20,16 @@ jobs:
           git config --global user.name "GitHub Mirror Bot"
           git config --global user.email "actions@github.com"
           git remote add gitlab https://iibarra:${{ secrets.GITLAB_TOKEN_P }}@gitlab.factupid.com:8443/iibarra/tutorial.git
-          git push --mirror gitlab
+          git fetch --prune
+          git push gitlab +refs/heads/*:refs/heads/* --force
+          git push gitlab +refs/tags/*:refs/tags/* --force
+
+      # - name: Push to GitLab mirror
+      #   run: |
+      #     git config --global user.name "GitHub Mirror Bot"
+      #     git config --global user.email "actions@github.com"
+      #     git remote add gitlab https://iibarra:${{ secrets.GITLAB_TOKEN_P }}@gitlab.factupid.com:8443/iibarra/tutorial.git
+      #     git push --mirror gitlab
 
 
 # name: Mirror to GitLab
