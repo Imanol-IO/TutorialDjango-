@@ -1,0 +1,50 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - main
+      - develop  # puedes agregar más ramas si quieres
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Push to GitLab mirror
+        run: |
+          git config --global user.name "GitHub Mirror Bot"
+          git config --global user.email "actions@github.com"
+          git remote add gitlab https://iibarra:${{ secrets.GITLAB_TOKEN_P }}@gitlab.factupid.com:8443/iibarra/tutorial.git
+          git push --mirror gitlab
+
+
+# name: Mirror to GitLab
+
+# on:
+#   push:
+#     branches:
+#       - main
+#       - develop  # o las ramas que quieras sincronizar
+
+# jobs:
+#   sync:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       - name: Push to GitLab mirror
+#         run: |
+#           git config --global user.name "GitHub Mirror Bot"
+#           git config --global user.email "actions@github.com"
+#           git remote add gitlab https://<USUARIO_GITLAB>:${{ secrets.GITLAB_TOKEN_P }}@gitlab.tudominio.com/tu_usuario/tu_repositorio.git
+#           git push --mirror gitlab
+
+       # Opción B (alternativa segura): solo ramas y tags, sin borrar nada en GitLab
+      # - name: Push all branches and tags (no delete)
+      #   run: |
+      #     git push --all gitlab
+      #     git push --tags gitlab
