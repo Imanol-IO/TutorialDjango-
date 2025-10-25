@@ -6,6 +6,7 @@ on:
       - main
       - develop  # puedes agregar más ramas si quieres
       - imanol
+      - pruebaNewBranch  # nueva rama añadida
 
 jobs:
   sync:
